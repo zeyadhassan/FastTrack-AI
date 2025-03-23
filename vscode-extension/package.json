@@ -1,0 +1,52 @@
+{
+  "name": "fasttrack-ai",
+  "displayName": "FastTrack AI",
+  "description": "AI Code Tracking and Analysis Tool",
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "fasttrack-ai.startTracking",
+        "title": "Start AI Code Tracking"
+      },
+      {
+        "command": "fasttrack-ai.showGraph",
+        "title": "Show Code Graph"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "build": "webpack",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^4.9.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0",
+    "ts-loader": "^9.0.0"
+  },
+  "dependencies": {
+    "fasttrack-core": "file:../core"
+  }
+} 

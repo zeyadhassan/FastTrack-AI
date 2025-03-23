@@ -1,0 +1,18 @@
+{
+  "name": "fasttrack-ai",
+  "version": "0.1.0",
+  "description": "AI Code Tracking and Analysis Tool",
+  "private": true,
+  "workspaces": [
+    "vscode-extension",
+    "core",
+    "dashboard"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces"
+  },
+  "author": "",
+  "license": "MIT"
+} 
