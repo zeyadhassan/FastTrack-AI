@@ -13,7 +13,10 @@ module.exports = {
     vscode: 'commonjs vscode'
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    alias: {
+      '@fasttrack-ai/core': path.resolve(__dirname, 'lib/core')
+    }
   },
   module: {
     rules: [

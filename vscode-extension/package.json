@@ -2,6 +2,10 @@
   "name": "fasttrack-ai",
   "displayName": "FastTrack AI",
   "description": "AI Code Tracking and Analysis Tool",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeyadhassan/fasttrack-ai.git"
+    },
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.80.0"
@@ -84,7 +88,6 @@
   },
   "dependencies": {
     "@types/diff-match-patch": "^1.0.36",
-    "diff-match-patch": "^1.0.5",
-    "fasttrack-core": "file:../core"
+    "diff-match-patch": "^1.0.5"
   }
 }

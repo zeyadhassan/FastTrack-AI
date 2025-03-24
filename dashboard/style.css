@@ -661,3 +661,310 @@ code {
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
+
+/* File Heatmap */
+.file-heatmap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.heatmap-file {
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heatmap-file:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.heatmap-legend {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.color-box {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.legend-size {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.size-box {
+  background-color: hsla(var(--muted), 0.3);
+  border-radius: 3px;
+}
+
+.size-box.small {
+  width: 10px;
+  height: 10px;
+}
+
+.size-box.large {
+  width: 25px;
+  height: 25px;
+}
+
+/* Code List Items */
+.code-list-item {
+  background-color: hsl(var(--card));
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.code-list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.code-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.code-item-path {
+  font-weight: bold;
+  color: hsl(var(--foreground));
+}
+
+.code-item-meta {
+  display: flex;
+  gap: 8px;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.85em;
+}
+
+.code-preview {
+  background-color: hsl(var(--card-foreground-muted));
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin: 0;
+  font-size: 0.85em;
+  overflow: auto;
+  max-height: 150px;
+}
+
+/* Risk Indicators */
+.risk-indicators {
+  display: flex;
+  gap: 4px;
+}
+
+.risk-indicator {
+  font-size: 1rem;
+}
+
+.complexity-risk {
+  color: hsl(var(--destructive));
+}
+
+.test-risk {
+  color: hsl(var(--warning));
+}
+
+.stale-risk {
+  color: hsl(var(--muted));
+}
+
+/* Test Status */
+.test-status {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75em;
+}
+
+.test-status.tested {
+  background-color: hsla(var(--success), 0.2);
+  color: hsl(var(--success));
+}
+
+.test-status.untested {
+  background-color: hsla(var(--warning), 0.2);
+  color: hsl(var(--warning));
+}
+
+/* Complexity Indicators */
+.high-complexity {
+  color: hsl(var(--destructive));
+  font-weight: bold;
+}
+
+.medium-complexity {
+  color: hsl(var(--warning));
+  font-weight: bold;
+}
+
+.normal-complexity {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Stale Code Indicators */
+.very-stale {
+  color: hsl(var(--destructive));
+  font-weight: bold;
+}
+
+.stale {
+  color: hsl(var(--warning));
+  font-weight: bold;
+}
+
+.semi-stale {
+  color: hsl(var(--muted-foreground));
+}
+
+.stale-date {
+  font-size: 0.8em;
+  color: hsl(var(--muted-foreground));
+}
+
+/* AI Files List */
+.ai-files-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ai-files-list li {
+  margin-bottom: 8px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: hsl(var(--primary-foreground));
+}
+
+.file-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-count {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9em;
+}
+
+/* Recent AI List */
+.recent-ai-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recent-ai-list li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.recent-ai-list li:hover {
+  transform: translateX(3px);
+}
+
+.recent-item {
+  padding: 8px;
+  border-radius: var(--radius);
+  border-left: 3px solid hsl(var(--primary));
+  background-color: hsla(var(--primary), 0.05);
+}
+
+.recent-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.recent-file {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recent-time {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8em;
+}
+
+.recent-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Empty States */
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  background-color: hsla(var(--muted), 0.05);
+  border-radius: var(--radius);
+  height: 100%;
+  min-height: 150px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .code-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .file-heatmap {
+    gap: 5px;
+  }
+  
+  .heatmap-file {
+    max-width: 60px;
+    max-height: 60px;
+  }
+  
+  .recent-meta, .recent-info {
+    flex-direction: column;
+  }
+}
