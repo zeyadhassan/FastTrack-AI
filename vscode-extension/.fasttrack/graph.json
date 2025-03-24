@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    {
+      "id": "default-developer",
+      "type": "Developer",
+      "name": "Developer",
+      "email": "developer@example.com",
+      "createdAt": "2025-03-24T13:51:06.250Z",
+      "updatedAt": "2025-03-24T13:51:06.250Z"
+    }
+  ],
+  "edges": []
+}

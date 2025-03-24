@@ -5,11 +5,22 @@
     "outDir": "dist",
     "lib": ["ES2020"],
     "sourceMap": true,
-    "rootDir": "src",
+    "rootDir": "..",
     "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "baseUrl": ".",
+    "paths": {
+      "@fasttrack-ai/core": ["../core/src"]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "../core/node_modules/@types"
+    ]
   },
-  "exclude": ["node_modules", ".vscode-test"]
-} 
+  "include": ["src", "../core/src"],
+  "exclude": ["node_modules", ".vscode-test", "../core/src/__tests__"]
+}

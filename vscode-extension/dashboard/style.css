@@ -1,0 +1,51 @@
+body {
+  font-family: var(--vscode-font-family);
+  padding: 20px;
+  color: var(--vscode-foreground);
+  background: var(--vscode-editor-background);
+}
+
+h1 {
+  color: var(--vscode-titleBar-activeForeground);
+  margin-bottom: 20px;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  color: var(--vscode-titleBar-activeForeground);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.stat {
+  margin-bottom: 10px;
+}
+
+.stat-name {
+  color: var(--vscode-descriptionForeground);
+  font-size: 0.9em;
+}
+
+.stat-value {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--vscode-foreground);
+}
+
+.chart-container {
+  height: 200px;
+  margin-top: 15px;
+} 

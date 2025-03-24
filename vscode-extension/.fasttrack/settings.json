@@ -1,0 +1,8 @@
+{
+  "complexity": {
+    "threshold": 10
+  },
+  "staleCode": {
+    "days": 30
+  }
+}

@@ -1,27 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastTrack AI Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FastTrack AI - Code Radar</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/4.3.0/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash/4.17.21/lodash.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>FastTrack AI Dashboard</h1>
-        </header>
-        <main>
-            <section class="graph-view">
-                <h2>Code Graph</h2>
-                <div id="graph-container"></div>
-            </section>
-            <section class="stats">
-                <h2>Statistics</h2>
-                <div id="stats-container"></div>
-            </section>
-        </main>
+  <header>
+    <div class="logo">
+      <span class="logo-text">FastTrack<span class="logo-highlight">AI</span></span>
+      <span class="logo-tag">Code Radar</span>
     </div>
-    <script src="app.js"></script>
+    <nav>
+      <button id="overview-btn" class="active">Overview</button>
+      <button id="ai-code-btn">AI Code</button>
+      <button id="test-coverage-btn">Test Coverage</button>
+      <button id="complexity-btn">Complexity</button>
+      <button id="stale-code-btn">Stale Code</button>
+    </nav>
+    <div class="project-stats">
+      <div class="stat-item">
+        <span class="stat-value" id="ai-percentage">-</span>
+        <span class="stat-label">AI Code</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="test-coverage">-</span>
+        <span class="stat-label">Tested</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="stale-blocks">-</span>
+        <span class="stat-label">Stale</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview-section" class="active-section">
+      <div class="section-header">
+        <h2>Project Overview</h2>
+        <div class="date-range">
+          <label for="date-range">Time period:</label>
+          <select id="date-range">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card animate-in stagger-1">
+          <h3>AI Usage Over Time</h3>
+          <div class="chart-container">
+            <canvas id="ai-usage-chart"></canvas>
+          </div>
+        </div>
+        <div class="card animate-in stagger-2">
+          <h3>AI Code by Developer</h3>
+          <div class="chart-container">
+            <canvas id="developer-chart"></canvas>
+          </div>
+        </div>
+        <div class="card animate-in stagger-3">
+          <h3>Top AI-Heavy Files</h3>
+          <div id="ai-files-list" class="list-container"></div>
+        </div>
+        <div class="card animate-in stagger-4">
+          <h3>Recent AI Suggestions</h3>
+          <div id="recent-ai-list" class="list-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai-code-section">
+      <div class="section-header">
+        <h2>AI-Generated Code</h2>
+        <div class="filter-options">
+          <select id="ai-tool-filter">
+            <option value="all">All AI Tools</option>
+            <option value="Copilot">GitHub Copilot</option>
+            <option value="Cursor">Cursor</option>
+          </select>
+        </div>
+      </div>
+      <div class="card full-width glass-card">
+        <h3>AI Code Heatmap</h3>
+        <div class="heatmap-container" id="ai-heatmap"></div>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>AI Code Blocks</h3>
+          <div id="ai-code-list" class="list-container code-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="test-coverage-section">
+      <div class="section-header">
+        <h2>Test Coverage</h2>
+        <div class="filter-options">
+          <label>
+            <input type="checkbox" id="untested-only" checked>
+            Show untested only
+          </label>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Test Coverage by File</h3>
+          <div class="chart-container">
+            <canvas id="test-coverage-chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Untested AI Code</h3>
+          <div id="untested-list" class="list-container code-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="complexity-section">
+      <div class="section-header">
+        <h2>Code Complexity</h2>
+        <div class="filter-options">
+          <label>Threshold:
+            <input type="range" id="complexity-threshold" min="5" max="20" value="10">
+            <span id="threshold-value">10</span>
+          </label>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Complexity Distribution</h3>
+          <div class="chart-container">
+            <canvas id="complexity-chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Complex AI Code Blocks</h3>
+          <div id="complex-code-list" class="list-container code-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stale-code-section">
+      <div class="section-header">
+        <h2>Stale AI Code</h2>
+        <div class="filter-options">
+          <label>Stale after:
+            <select id="stale-days">
+              <option value="14">14 days</option>
+              <option value="30" selected>30 days</option>
+              <option value="60">60 days</option>
+              <option value="90">90 days</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Stale Code by Age</h3>
+          <div class="chart-container">
+            <canvas id="stale-chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Stale AI Code Blocks</h3>
+          <div id="stale-code-list" class="list-container code-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="code-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="modal-title">Code Block</h3>
+      <div class="code-meta">
+        <span id="modal-file">File: </span>
+        <span id="modal-lines">Lines: </span>
+        <span id="modal-complexity">Complexity: </span>
+        <span id="modal-date">Last Modified: </span>
+      </div>
+      <pre><code id="modal-code" class="language-javascript"></code></pre>
+      <div class="modal-actions">
+        <button id="add-test-btn">Add Test</button>
+        <button id="open-in-editor-btn">Open in Editor</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Theme toggle functionality
+    const setTheme = (isDark) => {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('fasttrack-theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('fasttrack-theme', 'light');
+      }
+    };
+
+    // Check for saved theme preference or respect OS preference
+    const savedTheme = localStorage.getItem('fasttrack-theme');
+    if (savedTheme === 'dark') {
+      setTheme(true);
+    } else if (savedTheme === 'light') {
+      setTheme(false);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme(true);
+    }
+  </script>
 </body>
-</html> 
+</html>

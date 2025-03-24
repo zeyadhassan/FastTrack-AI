@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { Storage } from '../storage';
-import { Graph, Node } from '../types';
+import { Graph, Node, NodeType } from '../models';
 
 // Mock fs-extra
 jest.mock('fs-extra');
@@ -45,13 +45,13 @@ describe('Storage', () => {
   test('should load graph from disk', async () => {
     const mockNode: Node = {
       id: 'test',
-      type: 'file',
+      type: NodeType.File,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
     const mockGraph: Graph = { nodes: [mockNode], edges: [] };
     
-    (fs.readFile as jest.Mock).mockResolvedValueOnce(JSON.stringify(mockGraph));
+    (fs.readFile as unknown as jest.Mock).mockResolvedValueOnce(JSON.stringify(mockGraph));
     
     const result = await storage.loadGraph();
     
@@ -62,7 +62,7 @@ describe('Storage', () => {
   test('should save graph to disk', async () => {
     const mockNode: Node = {
       id: 'test',
-      type: 'file',
+      type: NodeType.File,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
@@ -81,7 +81,7 @@ describe('Storage', () => {
     const filePath = 'src/test.js';
     const content = 'test content';
     
-    (fs.readFile as jest.Mock).mockResolvedValueOnce(content);
+    (fs.readFile as unknown as jest.Mock).mockResolvedValueOnce(content);
     
     const result = await storage.getFileContent(filePath);
     

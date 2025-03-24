@@ -3,7 +3,6 @@
   "displayName": "FastTrack AI",
   "description": "AI Code Tracking and Analysis Tool",
   "version": "0.1.0",
-  "type": "module",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -17,14 +16,51 @@
   "contributes": {
     "commands": [
       {
-        "command": "fasttrack-ai.startTracking",
-        "title": "Start AI Code Tracking"
+        "command": "fasttrack-ai.toggleTracking",
+        "title": "FastTrack AI: Toggle Tracking"
       },
       {
-        "command": "fasttrack-ai.showGraph",
-        "title": "Show Code Graph"
+        "command": "fasttrack-ai.openDashboard",
+        "title": "FastTrack AI: Open Dashboard"
+      },
+      {
+        "command": "fasttrack-ai.analyzeWorkspace",
+        "title": "FastTrack AI: Analyze Workspace"
+      },
+      {
+        "command": "fasttrack-ai.detectAICode",
+        "title": "FastTrack AI: Detect AI Code"
+      },
+      {
+        "command": "fasttrack-ai.tagSelection",
+        "title": "FastTrack AI: Tag Selection"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "fasttrack-ai-sidebar",
+          "title": "FastTrack AI",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "fasttrack-ai-sidebar": [
+        {
+          "id": "fasttrack-ai-status",
+          "name": "Status"
+        },
+        {
+          "id": "fasttrack-ai-files",
+          "name": "AI Files"
+        },
+        {
+          "id": "fasttrack-ai-untested",
+          "name": "Untested Code"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -36,17 +72,19 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.80.0",
     "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.0",
+    "ts-loader": "^9.0.0",
     "typescript": "^4.9.0",
     "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0",
-    "ts-loader": "^9.0.0"
+    "webpack-cli": "^4.0.0"
   },
   "dependencies": {
+    "@types/diff-match-patch": "^1.0.36",
+    "diff-match-patch": "^1.0.5",
     "fasttrack-core": "file:../core"
   }
-} 
+}
